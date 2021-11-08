@@ -16,14 +16,13 @@ namespace SkiaTest
         {
             Title = "Simple Circle";
 
-            SKCanvasView canvasView = new SKCanvasView();
-            canvasView.PaintSurface += OnCanvasViewPaintSurface;
+            var canvasView = new SKGLView();
+            canvasView.PaintSurface += CanvasView_PaintSurface;
             Content = canvasView;
         }
 
-        void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        private void CanvasView_PaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            SKImageInfo info = args.Info;
             SKSurface surface = args.Surface;
             SKCanvas canvas = surface.Canvas;
 
@@ -43,7 +42,7 @@ namespace SkiaTest
                 Style = SKPaintStyle.Fill,
                 Color = Color.Red.ToSKColor(),
             };
-            canvas.Clear();
+            canvas.Clear(SKColors.White);
 
             canvas.Translate(200, 200);
             canvas.Scale(10, 10);
